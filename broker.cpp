@@ -303,7 +303,7 @@ private:
    -----------------------------------------------------------------------*/
 int main() {
     // Endereço do broker local (Mosquitto rodando em 1883)
-    const std::string address   = "tcp://172.20.0.14:1883";
+    const std::string address   = "tcp://172.20.0.14:1884";
     const std::string clientId  = "CppBroker";
 
     std::cout << "Iniciando a lógica MQTT em C++..." << std::endl;
