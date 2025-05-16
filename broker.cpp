@@ -98,7 +98,12 @@ JsonMessage canToJson(const CanMessage& msg) {
     result.AlgorithmID = algorithmId;
     // Timestamp ISO 8601 (simplificado)
     // Você poderia usar <chrono> e formatar adequadamente.
-    result.Timestamp   = "2025-01-31T12:00:00Z";
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    std::stringstream ss;
+    ss << std::put_time(std::gmtime(&now_c), "%FT%TZ");
+    result.Timestamp = ss.str();
+
     result.Status      = status;
 
     if (algorithmId == "BlindSpotDetection") {
@@ -146,7 +151,8 @@ JsonMessage canToJsonSim(const CanMessageSimulator& simMsg) {
         };
     } else {
         result.Data = {
-            {"DistanceToVehicle", distance / 100.0}
+            {"DistanceToVehicle", distance / 100.0},
+            {"Prioridade", prioridade}
         };
     }
 
